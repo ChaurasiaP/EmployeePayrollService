@@ -148,3 +148,49 @@ mysql> select * from employee_payroll;
 
 mysql>
 ----------------- END OF UC-6 ------------------
+
+----------------- UC-7 ------------------
+---- TO FIND SUM, AVERAGE, MINIMUM, MAXIMUM AND COUNT OF M/F EMPLOYEES ----
+
+mysql> select sum(salary) from employee_payroll where Gender = 'M' group by gender;
++-------------+
+| sum(salary) |
++-------------+
+|     1600000 |
++-------------+
+1 row in set (0.06 sec)
+
+mysql> select avg(salary) from employee_payroll where Gender = 'M' group by gender;
++-------------+
+| avg(salary) |
++-------------+
+| 533333.3333 |
++-------------+
+1 row in set (0.05 sec)
+
+mysql> select max(salary) from employee_payroll where Gender = 'M' group by gender;
++-------------+
+| max(salary) |
++-------------+
+|      750000 |
++-------------+
+1 row in set (0.06 sec)
+
+mysql> select min(salary) from employee_payroll where Gender = 'M' group by gender;
++-------------+
+| min(salary) |
++-------------+
+|      100000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from employee_payroll where Gender = 'M' group by gender;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql>
+----------------- END OF UC-7 ------------------

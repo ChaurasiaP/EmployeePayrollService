@@ -25,7 +25,6 @@ mysql>
 ----------------- END OF UC-1 ------------------
 
 ---------------------- UC-2 ----------------------
-
 --- To create a employee payroll table in the payroll service database ---
 
 mysql> create table Employee_Payroll(
@@ -92,8 +91,7 @@ mysql> select * from employee_payroll;
 mysql>
 ----------------- END OF UC-4 ------------------
 
------------------ UC-5 ------------------
-
+---------------- UC-5 ------------------
 --- to retrieve salary of an employee using their name and on the basis of their joining date range ----
 
 mysql> select salary from employee_payroll where name = "Arav";
@@ -114,3 +112,39 @@ mysql> select salary from employee_payroll where Start_Date between cast('2020-0
 
 mysql>
 ----------------- END OF UC-5 ------------------
+
+----------------- UC-6 ------------------
+---- TO CREATE A COLUMN "GENDER" AND ASSIGN m/f TO THE EMPLOYEE ----
+
+mysql> alter table employee_payroll add Gender varchar(5);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| EmpID      | bigint      | NO   | PRI | NULL    | auto_increment |
+| Name       | varchar(20) | YES  |     | NULL    |                |
+| salary     | bigint      | YES  |     | NULL    |                |
+| Start_Date | date        | YES  |     | NULL    |                |
+| Gender     | varchar(5)  | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee_payroll set Gender = 'M' where name = "Pranshu" or name = "Rohan" or name = "Arav";
+Query OK, 3 rows affected (0.07 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee_payroll;
++-------+---------+--------+------------+--------+
+| EmpID | Name    | salary | Start_Date | Gender |
++-------+---------+--------+------------+--------+
+|   101 | Pranshu | 100000 | 2017-08-01 | M      |
+|   102 | Rohan   | 750000 | 2018-06-01 | M      |
+|   103 | Arav    | 750000 | 2021-11-30 | M      |
++-------+---------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
+----------------- END OF UC-6 ------------------

@@ -281,3 +281,71 @@ mysql> select * from employee_payroll;
 3 rows in set (0.00 sec)
 mysql>
 ----------------- END OF UC-9 ------------------
+
+----------------- UC-10 ------------------
+---- ABILITY TO ADD DATA IN MULTIPLE ROWS COLUMNS AND ADD A NEW EMPLOYEE IN SALES & MARKETING TEAM ----
+
+mysql> update employee_payroll set Deductions=10000, Taxable_pay=90000, Income_tax=16200, Net_pay=73800 where EmpID=101;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee_payroll set Deductions=25000, Taxable_pay=725000, Income_tax=130500, Net_pay=594500 where EmpID=102;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set Deductions=25000, Taxable_pay=725000, Income_tax=130500, Net_pay=594500 where EmpID=103;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Department | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |            |         NULL | Mumbai  |      10000 |       90000 |      16200 |   73800 |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |            |         NULL | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |            |         NULL | Mumbai  |      25000 |      725000 |     130500 |  594500 |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set Phone_Number = 9090909090  where EmpID=101;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set Phone_Number = 8080808080  where EmpID=102;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set Phone_Number = 7070707070  where EmpID=103;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Department | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |            |   9090909090 | Mumbai  |      10000 |       90000 |      16200 |   73800 |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |            |   8080808080 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |            |   7070707070 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee_payroll values
+    -> ^C
+mysql> insert into employee_payroll values ("Terissa", 90000, '2023-04-15', 'F', "Sales & Marketing", 6060606060, "Pune", 5000, 85000, 13700, 71300);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee_payroll values (104, "Terissa", 90000, '2023-04-15', 'F', "Sales & Marketing", 6060606060, "Pune", 5000, 85000, 13700, 71300);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from employee_payroll;
++-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Department        | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |                   |   9090909090 | Mumbai  |      10000 |       90000 |      16200 |   73800 |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |                   |   8080808080 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |                   |   7070707070 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   104 | Terissa |     90000 | 2023-04-15 | F      | Sales & Marketing |   6060606060 | Pune    |       5000 |       85000 |      13700 |   71300 |
++-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql>
+----------------- END OF UC-10 ------------------

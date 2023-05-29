@@ -91,3 +91,26 @@ mysql> select * from employee_payroll;
 
 mysql>
 ----------------- END OF UC-4 ------------------
+
+----------------- UC-5 ------------------
+
+--- to retrieve salary of an employee using their name and on the basis of their joining date range ----
+
+mysql> select salary from employee_payroll where name = "Arav";
++--------+
+| salary |
++--------+
+| 750000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee_payroll where Start_Date between cast('2020-01-01' as date) and date(now());
++--------+
+| salary |
++--------+
+| 750000 |
++--------+
+1 row in set (0.07 sec)
+
+mysql>
+----------------- END OF UC-5 ------------------

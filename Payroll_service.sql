@@ -58,3 +58,20 @@ mysql> desc employee_payroll;
 mysql>
 
 ----------------- END OF UC-2 ------------------
+
+---------------------- UC-3 ----------------------
+---- Ability to create employee payroll data in the database ----
+
+mysql> insert into employee_payroll(EmpID,Name, salary, Start_Date) values (101, "Pranshu", 100000, '2017-08-01');
+Query OK, 1 row affected (0.07 sec)
+---for primary key with auto increment you can either leave the auto increment column empty or initialize once to set staring value
+
+mysql> insert into employee_payroll(Name, salary, Start_Date) values ("Rohan", 750000, '2018-06-01');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee_payroll(Name, salary, Start_Date) values ("Arav", 750000, '2021-11-30');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+
+----------------- END OF UC-3 ------------------

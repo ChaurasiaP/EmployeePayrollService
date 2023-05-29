@@ -329,23 +329,55 @@ mysql> select * from employee_payroll;
 +-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
 3 rows in set (0.00 sec)
 
-mysql> insert into employee_payroll values
-    -> ^C
-mysql> insert into employee_payroll values ("Terissa", 90000, '2023-04-15', 'F', "Sales & Marketing", 6060606060, "Pune", 5000, 85000, 13700, 71300);
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
-mysql> insert into employee_payroll values (104, "Terissa", 90000, '2023-04-15', 'F', "Sales & Marketing", 6060606060, "Pune", 5000, 85000, 13700, 71300);
-Query OK, 1 row affected (0.09 sec)
+alter table employee_payroll drop column department;
++-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |   9090909090 | Mumbai  |      10000 |       90000 |      16200 |   73800 |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |   8080808080 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |   7070707070 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
++-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
+
+insert into employee_payroll(EmpID, Name, Basic_pay, Start_date, Gender, Phone_Number, Address, Deductions, Taxable_pay, Income_tax, Net_pay) values (104,"Terissa", 90000, '2023-04-15', 'F', 6060606060, "Pune", 5000, 85000, 13700, 71300);
 
 mysql> select * from employee_payroll;
-+-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
-| EmpID | Name    | Basic_pay | Start_Date | Gender | Department        | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
-+-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
-|   101 | Pranshu |    100000 | 2017-08-01 | M      |                   |   9090909090 | Mumbai  |      10000 |       90000 |      16200 |   73800 |
-|   102 | Rohan   |    750000 | 2018-06-01 | M      |                   |   8080808080 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
-|   103 | Arav    |    750000 | 2021-11-30 | M      |                   |   7070707070 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
-|   104 | Terissa |     90000 | 2023-04-15 | F      | Sales & Marketing |   6060606060 | Pune    |       5000 |       85000 |      13700 |   71300 |
-+-------+---------+-----------+------------+--------+-------------------+--------------+---------+------------+-------------+------------+---------+
++-------+---------+-----------+------------+--------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |   9090909090 | Mumbai  |      10000 |       90000 |      16200 |   73800 |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |   8080808080 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |   7070707070 | Mumbai  |      25000 |      725000 |     130500 |  594500 |
+|   104 | Terissa |     90000 | 2023-04-15 | F      |   6060606060 | Pune    |       5000 |       85000 |      13700 |   71300 |
++-------+---------+-----------+------------+--------+--------------+---------+------------+-------------+------------+---------+
 4 rows in set (0.00 sec)
+
+mysql> create table employee_department(
+    -> deptID int NOT NULL,
+    -> department varchar(20),
+    -> EmpID bigint,
+    -> primary key(deptID),
+    -> foreign key(EmpID) references employee_payroll(EmpID));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_payroll_service |
++---------------------------+
+| employee_department       |
+| employee_payroll          |
++---------------------------+
+
+insert into employee_department(deptID, department, EmpID) values (1, "Sales",104);
+insert into employee_department(deptID, department, EmpID) values (2, "Marketing",104);
+
+mysql> select * from employee_department;
++--------+------------+-------+
+| deptID | department | EmpID |
++--------+------------+-------+
+|      1 | Sales      |   104 |
+|      2 | Marketing  |   104 |
++--------+------------+-------+
+2 rows in set (0.00 sec)
 
 mysql>
 ----------------- END OF UC-10 ------------------

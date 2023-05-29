@@ -194,3 +194,38 @@ mysql> select count(*) from employee_payroll where Gender = 'M' group by gender;
 
 mysql>
 ----------------- END OF UC-7 ------------------
+
+----------------- UC-8 ------------------
+---- TO ADD DEPARTMENT (NOT NULL), PHONE NUMBER AND DEFAULT ADDRESS IN EMPLOYEE PAYROLL DATABASE ----
+
+mysql> alter table employee_payroll add Department varchar(20) not null, add Phone_Number bigint(10), add Address varchar(20) default 'Mumbai';
+Query OK, 0 rows affected, 1 warning (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc employee_payroll;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| EmpID        | bigint      | NO   | PRI | NULL    | auto_increment |
+| Name         | varchar(20) | YES  |     | NULL    |                |
+| salary       | bigint      | YES  |     | NULL    |                |
+| Start_Date   | date        | YES  |     | NULL    |                |
+| Gender       | varchar(5)  | YES  |     | NULL    |                |
+| Department   | varchar(20) | NO   |     | NULL    |                |
+| Phone_Number | bigint      | YES  |     | NULL    |                |
+| Address      | varchar(20) | YES  |     | Mumbai  |                |
++--------------+-------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee_payroll;
++-------+---------+--------+------------+--------+------------+--------------+---------+
+| EmpID | Name    | salary | Start_Date | Gender | Department | Phone_Number | Address |
++-------+---------+--------+------------+--------+------------+--------------+---------+
+|   101 | Pranshu | 100000 | 2017-08-01 | M      |            |         NULL | Mumbai  |
+|   102 | Rohan   | 750000 | 2018-06-01 | M      |            |         NULL | Mumbai  |
+|   103 | Arav    | 750000 | 2021-11-30 | M      |            |         NULL | Mumbai  |
++-------+---------+--------+------------+--------+------------+--------------+---------+
+3 rows in set (0.00 sec)
+
+mysql>
+----------------- END OF UC-8 ------------------

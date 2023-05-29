@@ -21,6 +21,6 @@ mysql> use payroll_service;
 Database changed
 mysql>
 
------------------- END OF UC-1 ------------------
+----------------- END OF UC-1 ------------------
 
 

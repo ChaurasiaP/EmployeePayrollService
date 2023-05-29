@@ -229,3 +229,55 @@ mysql> select * from employee_payroll;
 
 mysql>
 ----------------- END OF UC-8 ------------------
+
+----------------- UC-9 ------------------
+---- Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay ----
+
+mysql> alter table employee_payroll add Deductions int, add Taxable_pay int, add Income_tax int, add Net_pay int;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| EmpID        | bigint      | NO   | PRI | NULL    | auto_increment |
+| Name         | varchar(20) | YES  |     | NULL    |                |
+| salary       | bigint      | YES  |     | NULL    |                |
+| Start_Date   | date        | YES  |     | NULL    |                |
+| Gender       | varchar(5)  | YES  |     | NULL    |                |
+| Department   | varchar(20) | NO   |     | NULL    |                |
+| Phone_Number | bigint      | YES  |     | NULL    |                |
+| Address      | varchar(20) | YES  |     | Mumbai  |                |
+| Deductions   | int         | YES  |     | NULL    |                |
+| Taxable_pay  | int         | YES  |     | NULL    |                |
+| Income_tax   | int         | YES  |     | NULL    |                |
+| Net_pay      | int         | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from employee_payroll;
++-------+---------+--------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | salary | Start_Date | Gender | Department | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+--------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu | 100000 | 2017-08-01 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
+|   102 | Rohan   | 750000 | 2018-06-01 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
+|   103 | Arav    | 750000 | 2021-11-30 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
++-------+---------+--------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee_payroll rename column salary to Basic_pay;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+| EmpID | Name    | Basic_pay | Start_Date | Gender | Department | Phone_Number | Address | Deductions | Taxable_pay | Income_tax | Net_pay |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+|   101 | Pranshu |    100000 | 2017-08-01 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
+|   102 | Rohan   |    750000 | 2018-06-01 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
+|   103 | Arav    |    750000 | 2021-11-30 | M      |            |         NULL | Mumbai  |       NULL |        NULL |       NULL |    NULL |
++-------+---------+-----------+------------+--------+------------+--------------+---------+------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+mysql>
+----------------- END OF UC-9 ------------------

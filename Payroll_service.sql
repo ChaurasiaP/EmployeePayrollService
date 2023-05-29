@@ -75,3 +75,19 @@ Query OK, 1 row affected (0.07 sec)
 mysql>
 
 ----------------- END OF UC-3 ------------------
+
+-------------------- UC-4 ---------------------
+---- Ability to retrieve all the employee payroll data that is added ----
+
+mysql> select * from employee_payroll;
++-------+---------+--------+------------+
+| EmpID | Name    | salary | Start_Date |
++-------+---------+--------+------------+
+|   101 | Pranshu | 100000 | 2017-08-01 |
+|   102 | Rohan   | 750000 | 2018-06-01 |
+|   103 | Arav    | 750000 | 2021-11-30 |
++-------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>
+----------------- END OF UC-4 ------------------
